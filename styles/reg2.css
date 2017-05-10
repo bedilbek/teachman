@@ -1,0 +1,54 @@
+
+html,body {
+	margin:0;
+	padding:0;
+	height: 100%;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+header{
+	display: block;
+}
+
+body{
+	font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	background:url(../project/images/bgnoise_lg.png);
+	font-weight: 400;
+	font-size: 15px;
+	color: #3a2127;
+	overflow-y: scroll;
+}
+a{
+	color: #333;
+	text-decoration: none;
+}
+.container{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+/*.clr{
+	clear: both;
+}*/
+.container > header{
+	padding: 20px 30px 20px 30px;
+	margin: 0px 20px 10px 20px;
+	position: relative;
+	display: block;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.container >  h1{
+	position: relative;
+	color: #01b1d7;
+	font-weight: 700;
+	font-style: normal;
+	font-size: 50px;
+	padding: 0px 0px 5px 0px;
+	text-align: center;
+
+}
+
