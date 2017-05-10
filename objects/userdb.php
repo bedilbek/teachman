@@ -121,7 +121,8 @@ class UserDB extends ObjectDB
     }
 
     public static function getLink($user_id) {
-        return URL::get("project/teachers.php","",array("user_id"=>$user_id));
+        $link = Config::DIR_MENU_LINKS;
+        return URL::get($link."teachers.php","",array("user_id"=>$user_id));
     }
 
     public static function getAllOnTeacher($type){

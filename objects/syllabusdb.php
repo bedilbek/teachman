@@ -53,7 +53,8 @@ class SyllabusDB extends ObjectDB
     }
 
     public static function getLink($user_id) {
-        return URL::get("project/syllabus.php","",array("user_id"=>$user_id));
+        $link = Config::DIR_MENU_LINKS;
+        return URL::get($link."syllabus.php","",array("user_id"=>$user_id));
     }
 
     public static function getCountOnUserID($user_id)

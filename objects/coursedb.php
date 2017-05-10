@@ -34,7 +34,8 @@ class CourseDB extends ObjectDB
         return $select;
     }
     public static function getLink($user_id) {
-        return URL::get("project/courses.php","",array("user_id"=>$user_id));
+        $link = Config::DIR_MENU_LINKS;
+        return URL::get($link."courses.php","",array("user_id"=>$user_id));
     }
     public static function getAllOnCategoryID($category_id)
     {

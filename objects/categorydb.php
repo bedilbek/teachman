@@ -21,7 +21,8 @@ class CategoryDB extends ObjectDB
 
     protected function postInit()
     {
-        $this->link = URL::get("project/categories.php","",array("id"=>$this->getID()));
+    	$link = Config::DIR_MENU_LINKS;
+        $this->link = URL::get($link."categories.php","",array("id"=>$this->getID()));
         $user = new UserDB();
         $user->load($this->user_id);
         $this->user = $user;
@@ -55,7 +56,8 @@ class CategoryDB extends ObjectDB
     }
 
     public static function getLink($user_id) {
-        return URL::get("project/categories.php","",array("user_id"=>$user_id));
+    	$link = Config::DIR_MENU_LINKS;
+        return URL::get($link."categories.php","",array("user_id"=>$user_id));
     }
     public static function getCountOnUserID($user_id)
     {

@@ -22,6 +22,7 @@
         const DB_SYM_QUERY = "?";
         const DB_PREFIX = "";
 
+        const DIR_MENU_LINKS = "teachman/";
         const DIR_IMG = "/images/";
         const DIR_IMG_AVATAR = "/project/images/avatar/";
         const DIR_TEMPLATES = "/var/www/html/project/templates";
