@@ -21,9 +21,9 @@ class  MixedDB {
 
             $teachers = UserDB::getAllOnTeacher("E");
             $numberOfTeachers = UserDB::getCountOnTeachers("E");
+
             $linkOfTeachers = UserDB::getLink($user->getID());
-            if ($user->isAdmin())
-                $fields[] = (object) array("count"=>$numberOfTeachers, "link"=>$linkOfTeachers, "name"=>"Teachers", "img"=>"user", "color"=>"brown");
+            if ($user->isAdmin()) $fields[] = (object) array("count"=>$numberOfTeachers, "link"=>$linkOfTeachers, "name"=>"Teachers", "img"=>"user", "color"=>"brown");
 
             $categories = CategoryDB::getAllOnUserID($user->getID());
             //print_r($categories);
@@ -43,7 +43,7 @@ class  MixedDB {
             $fields[] = (object) array("count"=>$numberOfSyllabus, "link"=>$linkOfSyllabus, "name"=>"Syllabus", "img"=>"th-list", "color"=>"blue");
 
             if (!$user->isAdmin())
-                $fields[] = (object) array("count"=>$numberOfSyllabus, "link"=>"project/syllabus.php?user_id=2", "name"=>"Quizzes", "img"=>"edit", "color"=>"brown");
+                $fields[] = (object) array("count"=>$numberOfSyllabus, "link"=>"quizzes.php", "name"=>"Quizzes", "img"=>"edit", "color"=>"brown");
             return $fields;
         }
 

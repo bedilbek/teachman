@@ -41,6 +41,7 @@ class CategoryDB extends ObjectDB
         if ($count) $select->limit($count,$offset);
         $data = self::$db->select($select);
         $categories = ObjectDB::buildMultiple(__CLASS__,$data);
+        //print_r($categories);
         return $categories;
     }
 
@@ -57,7 +58,7 @@ class CategoryDB extends ObjectDB
 
     public static function getLink($user_id) {
     	$link = Config::DIR_MENU_LINKS;
-        return URL::get($link."categories.php","",array("user_id"=>$user_id));
+        return URL::get($link."categories.php","",array());
     }
     public static function getCountOnUserID($user_id)
     {

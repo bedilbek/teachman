@@ -16,14 +16,15 @@ class UserDB extends ObjectDB
         parent::__construct(self::$table);
         $this->add("firstname","ValidateName");
         $this->add("lastname","ValidateName");
-        $this->add("dob","ValidateDate",null,$this->getDate());
         $this->add("gender","ValidateBoolean");
+        $this->add("type","ValidateUserType");
         $this->add("username","ValidateLogin");
         $this->add("password","ValidatePassword");
         $this->add("email","ValidateEmail");
-        $this->add("img","ValidateURI");
-        $this->add("type","ValidateUserType");
-        $this->add("phone","ValidateID");
+        $this->add("img","ValidateIMG");
+        $this->add("dob","ValidateDate");
+        $this->add("phone","ValidatePhone");
+
     }
 
     protected function postInit()
@@ -34,6 +35,7 @@ class UserDB extends ObjectDB
     }
 
     protected function preValidate() {
+        if (is_null($this->type)) $this->type = "E";
         if ($this->img == Config::DIR_IMG_AVATAR.Config::DEFAULT_AVATAR) $this->img = null;
         if (!is_null($this->img)) $this->img = basename($this->img);
         if (!is_null($this->new_password)) $this->password = $this->new_password;
@@ -43,6 +45,8 @@ class UserDB extends ObjectDB
     protected function postValidate()
     {
        if (!is_null($this->new_password)) $this->password = md5($this->new_password);
+       if (is_null($this->img)) $this->img = Config::DEFAULT_AVATAR;
+       return true;
     }
 
     public function login(){
@@ -122,7 +126,7 @@ class UserDB extends ObjectDB
 
     public static function getLink($user_id) {
         $link = Config::DIR_MENU_LINKS;
-        return URL::get($link."teachers.php","",array("user_id"=>$user_id));
+        return URL::get($link."teachers.php","",array());
     }
 
     public static function getAllOnTeacher($type){
