@@ -52,8 +52,9 @@
          * Returns ready sql statement which can be executed
          */
         public function getQuery($query,$params){
+
             if ($params){
-                //print_r($params);
+
                 $offset = 0;
                 $len_sq = strlen($this->sq);
                 for ($i=0; $i<count($params); $i++){
@@ -61,7 +62,6 @@
                     if (is_null($params[$i])) $arg = "NULL";
                     else $arg = "'".$this->mysqli->real_escape_string($params[$i])."'";
                     $query = substr_replace($query,$arg,$pos,$len_sq);
-                    $offset = $pos+strlen($arg);
                 }
             }
             return $query;
@@ -94,6 +94,7 @@
 
             $result_set = $this->getResultSet($select, false, true);
             if (!$result_set) return false;
+
             return $result_set->fetch_assoc();
         }
 
@@ -126,6 +127,7 @@
          */
         public function selectCell(AbstractSelect $select){
             $result_set = $this->getResultSet($select, false, true);
+            //print $select."<br>";
             if (!$result_set) return false;
             $arr = array_values($result_set->fetch_assoc());
             return $arr[0];
@@ -156,6 +158,7 @@
             $fields .= ")";
             $values .= ")";
             $query = "INSERT INTO `$table_name` $fields $values";
+
             return $this->query($query, $params);
         }
 
@@ -224,6 +227,7 @@
          * On failure returns error
          */
         private function query($query, $params=false){
+
             $success = $this->mysqli->query($this->getQuery($query, $params));
             if (!$success) return false;
             if ($this->mysqli->insert_id === 0) return true;

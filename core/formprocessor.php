@@ -1,71 +1,83 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: bedilbek
- * Date: 5/6/17
- * Time: 7:01 AM
- */
-class FormProcessor
-{
+class FormProcessor {
+
     private $request;
-    private $message;
 
-    public function __construct($request, $message)
-    {
+    public function __construct($request) {
         $this->request = $request;
-        $this->message = $message;
-
     }
 
     public function process($message_name, $obj, $fields, $checks = array(), $success_message = false) {
         try {
             if (is_null($this->checks($message_name, $checks))) return null;
+            //print_r($fields);
+            //print"<br>";
             foreach ($fields as $field) {
+                //exit;
                 if (is_array($field)) {
                     $f = $field[0];
                     $v = $field[1];
+                    //print_r($f);
+                    //print"<br>";
+                    //print_r($v);
+                    //print"<br>";
+
                     if (strpos($f, "()") !== false) {
-                        $f = str_replace("()","", $f);
+                        $f = str_replace("()", "", $f);
                         $obj->$f($v);
                     }
                     else $obj->$f = $v;
                 }
-                else $obj->$field = $this->request->$field;
+                else {
+                    $obj->$field = $this->request->$field;
+                    //print $this->request->$field;
+                    //print $obj->$field;
+                    //exit;
+                }
             }
-
-            if ($obj->save()){
+            //exit;
+            if ($obj->save()) {
                 if ($success_message) $this->setSessionMessage($message_name, $success_message);
                 return $obj;
             }
-        }
-        catch (Exception $e){
+        } catch (Exception $e) {
+
             $this->setSessionMessage($message_name, $this->getError($e));
             return null;
         }
-
     }
+
     public function checks($message_name, $checks) {
         try {
-            for ($i=0; $i<count($checks); $i++){
-                $equal = isset($checks[$i][3]) ? $checks[$i][3] : true;
-                if ($equal  && ($checks[$i][0] != $checks[$i][1])) throw new Exception($checks[$i][2]);
-                elseif (!$equal && ($checks[$i][0] == $checks[$i][1])) throw new Exception();
-
+            for ($i =0; $i < count($checks); $i++) {
+                $equal = isset($checks[$i][3])? $checks[$i][3]: true;
+                if ($equal && ($checks[$i][0] != $checks[$i][1])) throw new Exception($checks[$i][2]);
+                elseif (!$equal && ($checks[$i][0] == $checks[$i][1])) throw new Exception($checks[$i][2]);
             }
             return true;
-        } catch (Exception $e){
+        } catch (Exception $e) {
             $this->setSessionMessage($message_name, $this->getError($e));
             return null;
         }
     }
 
-    public function setSessionMessage($to, $message_name){
-        if (!session_id()) session_start();
-        $_SESSION["message"] = array($to  => $message_name);
+    public function auth($message_name, $obj, $method, $login, $password) {
+        try {
+            $user = $obj::$method($login, $password);
+            return $user;
+        } catch (Exception $e) {
+            $this->setSessionMessage($message_name, $this->getError($e));
+            return false;
+        }
     }
 
-    public function getSessionMessage($to){
+    public function setSessionMessage($to, $message) {
+        if (!session_id()) session_start();
+        $_SESSION["message"] = array($to => $message);
+    }
+
+    public function getSessionMessage($to) {
         if (!session_id()) session_start();
         if (!empty($_SESSION["message"]) && !empty($_SESSION["message"][$to])) {
             $message = $_SESSION["message"][$to];
@@ -74,24 +86,12 @@ class FormProcessor
         }
         return false;
     }
+
     public function uploadIMG($message_name, $file, $max_size, $dir, $source_name = false) {
-            try {
-                    $name = File::uploadIMG($file, $max_size, $dir, false, $source_name);
-                    return $name;
-            }
-            catch (Exception $e) {
-                $this->setSessionMessage($message_name, $this->getError($e));
-                return false;
-            }
-    }
-
-
-    public function uploadDocument($message_name, $file, $max_size, $dir, $source_name = false) {
         try {
-            $name = File::uploadDocument($file, $max_size, $dir, false, $source_name);
+            $name = File::uploadIMG($file, $max_size, $dir, false, $source_name);
             return $name;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $this->setSessionMessage($message_name, $this->getError($e));
             return false;
         }
@@ -105,7 +105,7 @@ class FormProcessor
         elseif (($message = $e->getMessage())) return $message;
         return "UNKNOWN_ERROR";
     }
-}
 
+}
 
 ?>

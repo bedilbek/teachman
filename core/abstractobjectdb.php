@@ -71,13 +71,17 @@ abstract class AbstractObjectDB
     public function save()
     {
         $update = $this->isSaved();
-        if (!$update) $commit = $this->preUpdate();
+        if ($update) $commit = $this->preUpdate();
         else $commit = $this->preInsert();
         if (!$commit) return false;
 
+        $row = array();
         foreach ($this->properties as $key => $value) {
-            $row[$key] = $value;
+
+            $row[$key] = $value["value"];
+            //print $key."=>".$value["value"]."<br>";
         }
+
         if (count($row) > 0) {
             if ($update) {
                 $success = self::$db->update($this->table_name, $row, "`id`=" . self::$db->getSQ(), array($this->getID()));
@@ -324,14 +328,15 @@ abstract class AbstractObjectDB
             $row[$key] = $value["value"];
         }
         foreach ($v as $key => $validator) {
+            //print_r($validator);
             if(!$validator->isValid()) $errors[$key] = $validator->getErrors();
         }
-        return true;
         if (count($errors)==0) {
-            if (!$this->postValidate()) throw new Exception();
+            if (!$this->postValidate()) { throw new Exception();}
+
             return true;
         }
-        else throw new ValidatorException($errors);
+        throw new ValidatorException($errors);
     }
 
 }
