@@ -60,6 +60,7 @@ class CategoryDB extends ObjectDB
     	$link = Config::DIR_MENU_LINKS;
         return URL::get($link."categories.php","",array());
     }
+
     public static function getCountOnUserID($user_id)
     {
         $user = new UserDB();

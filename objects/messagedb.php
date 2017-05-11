@@ -55,7 +55,12 @@ class MessageDB extends ObjectDB
         $select->from(self::$table,"*");
         return $select;
     }
-
+    public static function getAllOnUserID($user_id){
+        $select = self::getBaseSelect();
+        $select->where("user_id",array($user_id));
+        $row = self::$db->select($select);
+        return self::buildMultiple(__CLASS__,$row);
+    }
     public static function getAllShow($count = false, $offset = false) {
         $select = self::getBaseSelect();
         $select->order("id",true);

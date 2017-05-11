@@ -39,7 +39,7 @@ class CourseDB extends ObjectDB
     }
     public static function getAllOnCategoryID($category_id)
     {
-        return self::getAllOnWhere(self::$table,__CLASS__,"category_id",$category_id);
+        return self::getAllOnWhere(self::$table,__CLASS__,"category_id",array($category_id));
     }
 
     public static function getCountOnCategoryID($category_id)

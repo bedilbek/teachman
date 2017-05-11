@@ -17,6 +17,8 @@ class LessonDB extends ObjectDB
         $this->add("title","ValidateTitle");
         $this->add("content","ValidateText");
         $this->add("file","ValidateURI");
+        $this->add("week_number","ValidateNumber");
+        $this->add("lesson_n","ValidateNumber");
     }
 
     protected function postInit()
@@ -29,9 +31,14 @@ class LessonDB extends ObjectDB
 
     public static function getAllOnSyllabusID($syllabus_id){
         $select = self::getBaseSelect();
-        $select->where("`syllabus_id` = ".self::$db->getSQ(), array($syllabus_id));
+        $select->where("`syllabus_id` = ".self::$db->getSQ(), array($syllabus_id))
+            ->order("lesson_n",true);
             $row = self::$db->select($select);
             return self::buildMultiple(__CLASS__,$row);
+    }
+    protected function postValidate(){
+        $this->file = null;
+        return true;
     }
 
     public static function getCountOnSyllabusID($syllabus_id)
@@ -70,29 +77,6 @@ class LessonDB extends ObjectDB
                 $numberOfLessonsOfUser++;
         if ($user->type == "A" || $user->type == "a") return self::getCount();
         return $numberOfLessonsOfUser;
-    }
-
-    public static function getAllOnCourseID($course_id)
-    {
-        $lessonsInCourse = array();
-        $lessons = self::getAllShow();
-        foreach ($lessons as $lesson) {
-            if ($lesson->syllabus->course->id == $course_id) {
-                $lessonsInCourse[] = $lesson;
-            }
-        }
-        if (!empty($lessonsInCourse)) return $lessonsInCourse;
-        else return null;
-    }
-
-    public static function getCountOnCourseID($course_id)
-    {
-        $numberOfLessonsInCourse = 0;
-        $lessons = self::getAllShow();
-        foreach ($lessons as $lesson)
-            if ($lesson->syllabus->course->id == $course_id)
-                $numberOfLessonsInCourse++;
-        return $numberOfLessonsInCourse;
     }
 
     private static function getBaseSelect() {

@@ -27,6 +27,17 @@ class SyllabusDB extends ObjectDB
         $this->course = $course;
         return true;
     }
+    public function loadOnCourseID($course_id){
+        return $this->loadOnField("course_id",$course_id);
+    }
+    public static function getOnCourseID($user_id,$course_id){
+        $syllabuses = self::getAllOnUserID($user_id);
+        foreach ($syllabuses as $syllabus){
+            if ($syllabus->course_id == $course_id)
+                return $syllabus;
+        }
+        return null;
+    }
 
     private static function getBaseSelect() {
         $select = new Select();
@@ -81,14 +92,5 @@ class SyllabusDB extends ObjectDB
         return $syllabus;
     }
 
-
-    public static function getAllOnPage($count, $offset = false) {
-        $select = self::getBaseSelect();
-        $select->order("id",false)
-            ->limit($count, $offset);
-        $data = self::$db->select($select);
-        $syllabus = ObjectDB::buildMultiple(__CLASS__,$data);
-        return $syllabus;
-    }
 }
 ?>
