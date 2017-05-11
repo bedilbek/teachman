@@ -509,12 +509,6 @@
 							<h3><span>follow</span> us on instagram</h3>
 							<div class="insta">
 								<ul>
-									<img src="images/footer/footer1.jpg" alt="">
-									<img src="images/footer/footer2.jpg" alt="">
-									<img src="images/footer/footer3.jpg" alt="">
-									<img src="images/footer/footer4.jpg" alt="">
-									<img src="images/footer/footer5.jpg" alt="">
-									<img src="images/footer/footer6.jpg" alt="">
 								</ul>
 							</div>
 						</div>

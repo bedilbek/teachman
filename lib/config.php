@@ -24,11 +24,10 @@
 
         const DIR_MENU_LINKS = "teachman/";
         const DIR_IMG = "/images/";
-        const DIR_IMG_AVATAR = "/project/images/avatar/";
-        const DIR_TEMPLATES = "/var/www/html/project/templates";
-        const DIR_EMAILS = "/var/www/html/project/templates/emails";
+        const DIR_IMG_AVATAR = "images/avatar/";
 
-        const FILE_MESSAGES = "/var/www/html/project/text/messages.ini";
+
+        const FILE_MESSAGES = "/var/www/html/".self::DIR_MENU_LINKS."text/messages.ini";
 
         const COUNT_ARTICLES_ON_PAGE = 3;
         const COUNT_SHOW_PAGES = 10;

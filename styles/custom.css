@@ -327,7 +327,7 @@ font-weight: 700;
 }
 .navbar-side {
 	border:none;
-	background-color: #30458e;
+	background-color: #30458e!important;
 
 }
 .navbar-cls-top {

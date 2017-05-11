@@ -42,7 +42,7 @@ else {
                 </button>
             </div>
             <div style="color: white;  padding: 15px 50px 5px 50px;  float: right;
-       font-size: 16px;">Last access : 30 May 2014
+       font-size: 16px;">
                 <a href="dashboard.php?logoutid=<?=$user_id?>" class="btn btn-danger square-btn-adjust">Logout</a>
             </div>
         </nav>
@@ -107,8 +107,8 @@ else {
                                        <td><?=$course->course_description?></td>
                                          <?php $t = $course->category->category_name; if ($user->isAdmin()) $t = $course->category->user->firstname." ".$course->category->user->lastname; ?> <td><?=$t?></td>
                                        <td class="center">
-                                         <span class="glyphicon glyphicon-edit hov" data-target="#modalEditCourse" data-toggle="modal"></span>
-                                         <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row('<?=$course->id?>')"></span>
+                                           <?php if (!$user->isAdmin()){ ?>  <span class="glyphicon glyphicon-edit hov" data-target="#modalEditCourse" data-toggle="modal"></span> <?php } ?>
+                                           <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row('<?=$course->id?>')"></span>
                                        </td>
                                    </tr>
                                  <?php } ?>

@@ -45,7 +45,7 @@
               </button>
           </div>
           <div style="color: white;  padding: 15px 50px 5px 50px;  float: right;
-       font-size: 16px;">Last access : 30 May 2014
+       font-size: 16px;">
               <a href="dashboard.php?logoutid=<?=$user_id?>" class="btn btn-danger square-btn-adjust">Logout</a>
           </div>
 </nav>
@@ -84,7 +84,7 @@
               Category management
               <div class="text-right">
                 <!--ADD CATEGORY-->
-                <button data-target="#modalCategory" class="btn btn-info text-right " data-toggle="modal">ADD</button>
+               <?php if (!$user->isAdmin()){ ?> <button data-target="#modalCategory" class="btn btn-info text-right " data-toggle="modal">ADD</button>  <?php } ?>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
                       <td><?=$category->category_description?></td>
                       <?php if ($user->isAdmin()) { ?> <td><?=$category->user->firstname?> <?=$category->user->lastname?></td> <?php } ?>
                       <td class="center">
-                        <span class="glyphicon glyphicon-edit hov" data-target="#modalEditCategory" data-toggle="modal"></span>
+                          <?php if (!$user->isAdmin()){ ?> <span class="glyphicon glyphicon-edit hov" data-target="#modalEditCategory" data-toggle="modal"></span> <?php } ?>
                         <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row('<?=$category->id?>')"></span>
                       </td>
                     </tr>

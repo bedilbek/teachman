@@ -2,17 +2,12 @@
 require_once "start.php";
 
 $request = new Request();
-$fp = new FormProcessor($request,new Message(Config::FILE_MESSAGES));
     if ($request->logoutid) {
        // print "1";
         if (!session_id()) session_start();
         session_unset();
         session_destroy();
-    }
-    if ($request->firsttime == "1") {
-            //            print "2";
-            $user = UserDB::authUser($request->username, $request->password);
-            $fields = MixedDB::getMixedObjects($user->getID());
+        header("Location: login.php");
     }
     else {
         //print "3";
@@ -22,12 +17,20 @@ $fp = new FormProcessor($request,new Message(Config::FILE_MESSAGES));
             $password = $_SESSION["auth_password"];
             $user = UserDB::authUser($request->username, $request->password);
             $fields = MixedDB::getMixedObjects($user->getID());
+            $messages = MessageDB::getAllShow();
+
+            if ($request->msg) {
+                $msg = new MessageDB();
+                $msg->content = $request->msg;
+                $msg->user_id = $request->user_id;
+                $msg->save();
+                $messages = MessageDB::getAllShow();
+            }
         }
         else {
             //print "4";
             $newURL = "login.php?session=0";
             header('Location: '.$newURL);
-
         }
     }
 ?>
@@ -50,7 +53,7 @@ $fp = new FormProcessor($request,new Message(Config::FILE_MESSAGES));
 
 <body>
     <div id="wrapper">
-        <nav class="navbar navbar-collapse navbar-cls-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-collapse navbar-cls-top " role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -60,13 +63,13 @@ $fp = new FormProcessor($request,new Message(Config::FILE_MESSAGES));
                 </button>
             </div>
             <div style="color: white;  padding: 15px 50px 5px 50px;  float: right;
-       font-size: 16px;">Last access : 30 May 2014
+       font-size: 16px;">
                 <a href="dashboard.php?logoutid=<?=$user->id?>" class="btn btn-danger square-btn-adjust">Logout</a>
             </div>
         </nav>
 
            <!-- /. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
+        <nav class="navbar-side" role="navigation">
           <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
               <li class="text-center">
@@ -121,150 +124,46 @@ $fp = new FormProcessor($request,new Message(Config::FILE_MESSAGES));
 
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="chat-panel panel panel-default chat-boder chat-panel-head" >
+                    <div class="chat-panel panel panel-default chat-border chat-panel-head" >
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
                             Chat Box
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-chevron-down"></i>
-                                </button>
-                                <ul class="dropdown-menu slidedown">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-refresh fa-fw"></i>Refresh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-check-circle fa-fw"></i>Available
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-times fa-fw"></i>Busy
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o fa-fw"></i>Away
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-sign-out fa-fw"></i>Sign Out
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
-
                         <div class="panel-body">
                             <ul class="chat-box">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="images/avatar/1.png" alt="User" class="img-circle" />
+                                <?php  foreach ($messages as $message) { ?>
+                         <?php if ($message->user->getID() == $user->getID()) { $icon="right"; $mes="left"; $text = "text-success"; } else {$icon="left"; $mes="right"; $text = "text-warning"; } ?>
+                                    <li class="<?=$icon?> clearfix">
+                                    <span class="chat-img pull-<?=$icon?>">
+                                        <img class="img-circle icon-box icon-bar" src="<?=$message->user->img?>" alt="User" style="height: auto;width: auto;max-width:50px;max-height:50px;" />
                                     </span>
-                                    <div class="chat-body">
-                                            <strong >Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>12 mins ago
+                                    <div class="chat-body clearfix">
+                                            <h5><strong class="pull-<?=$icon?> <?=$text?>"><?=$message->user->firstname?> <?=$message->user->lastname?></strong></h5>
+                                            <small class="text-muted pull-<?=$mes?>">
+                                                <i class="fa fa-clock-o fa-fw"></i><?=$message->lastseen?>
                                             </small>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
                                     </div>
+                                        <h4 class="text-muted">
+                                            <?=$message->content?>
+                                        </h4>
                                 </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-
-                                        <img src="images/avatar/2.png" alt="User" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>13 mins ago</small>
-                                            <strong class="pull-right">Jhonson Deed</strong>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                         <img src="images/avatar/3.png" alt="User" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                            <strong >Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>14 mins ago</small>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                         <img src="images/avatar/4.png" alt="User" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>15 mins ago</small>
-                                            <strong class="pull-right">Jhonson Deed</strong>
-
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                    <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="images/avatar/1.png" alt="User" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body">
-                                            <strong >Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>12 mins ago
-                                            </small>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                       <img src="images/avatar/2.png" alt="User" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>13 mins ago</small>
-                                            <strong class="pull-right">Jhonson Deed</strong>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
+                                <?php } ?>
                             </ul>
                         </div>
-
                         <div class="panel-footer">
+                            <form action="dashboard.php" method="POST">
                             <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message to send..." />
+                                <input id="btn-input" type="text" name="msg" class="form-control input-sm" placeholder="Type your message to send..." />
+                                <input type="hidden" name="user_id" value="<?=$user->getID()?>">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                    <button type="submit" class="btn btn-warning btn-sm" id="btn-chat">
                                         Send
                                     </button>
                                 </span>
                             </div>
+                            </form>
                         </div>
-
                     </div>
-
                 </div>
               </div>
                  <!-- /. ROW  -->
