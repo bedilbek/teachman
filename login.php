@@ -1,18 +1,22 @@
 <?php
 require_once "start.php";
 $request = new Request();
-if ($request->reg ==1) {
-    $user = new UserDB();
-    $user->firstname = $request->first_name;
-    $user->lastname = $request->last_name;
-    $user->dob = $request->BirthYear."-".$request->BirthMonth."-".$request->BirthDay;
-    $user->username = $request->username;
-    $user->setPassword($request->password);
-    $user->email = $request->email;
-    $user->gender = $request->gender;
-    $user->phone = $request->phone;
-    $user->save();
-    if ($user->isSaved()) print_r($user);
+if ($request->reg) {$message = "Registration is Succesful, you can continue by logging in"; $text="text-success";} else $text="text-danger";
+if($request->session == "0") $message = "Your session has expired, log in one more time";
+if (!session_id()) session_start();
+if (!empty($_SESSION["auth_login"]) && !empty($_SESSION["auth_password"])) {
+    $username = $_SESSION["auth_login"];
+    $password = $_SESSION["auth_password"];
+    $user = UserDB::authUser($request->username, $request->password);
+    if ($user instanceof UserDB) header("Location: dashboard.php");
+    else $message = "Incorrect Login or Password";
+
+}
+if ($request->login) {
+    $user = UserDB::authUser($request->username, $request->password);
+    if ($user instanceof UserDB) header("Location: dashboard.php");
+    else $message = "Incorrect Login or Password";
+
 }
 ?>
 <!DOCTYPE html>
@@ -22,6 +26,9 @@ if ($request->reg ==1) {
 	<title>Sign in</title>
 	<link rel="stylesheet" type="text/css" href="styles/loginstyle.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="styles/lgstyle.css" media="all" />
+    <!-- Bootstrap -->
+    <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/bootstrap/css/bootstrap-select.css" rel="stylesheet">
 </head>
 <body>
 
@@ -31,15 +38,15 @@ if ($request->reg ==1) {
     </header> 
    
    <div class="form">
-   	    <form name="auth" id="signin" action="dashboard.php" method="post">
+   	    <form name="auth" id="signin" action="login.php" method="post">
    			<p class="contact"><label for="username">Username </label></p>
    			<input id="username" name="username" placeholder="username" required="" type="text">
             <p class="contact"><label for="password">Password </label></p> 
             <input type="password" id="password" name="password" required=""> 			
             <p><input type="checkbox" name="rememberme" id="rememberme" value="rememberme">Remember me</p>		
-            <p ><input type="hidden" name="firsttime" value="1"> </p>
+            <p ><input type="hidden" name="login" value="1"> </p>
             <p ><input type="submit" name="Sign in" value="Sign in!" class="signinbtm"> </p>
-            <?php if($request->session == "0") { ?> <label>Your session has expired, log in one more time</label> <?php }?>
+            <?php if (isset($message))  { ?> <label class="<?=$text?>"><?=$message?></label> <?php }?>
             <h1 class="changelink"><a href="reg.php" class="toregister"> Register</a> </h1>
        </form>
    </div> 
