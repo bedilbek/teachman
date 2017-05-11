@@ -11,7 +11,12 @@ class ValidateBoolean extends Validator
     protected function validate()
     {
         $data = $this->data;
-        if (($data != 0) && ($data != 1)) $this->setErrors(self::CODE_UNKNOWN);
+
+        if (($data != 0) && ($data != 1)) { $this->setErrors(self::CODE_UNKNOWN);
+            if (!session_id()) session_start();
+            $_SESSION["bool"]="1";
+        }
+
     }
 
 

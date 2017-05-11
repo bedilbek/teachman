@@ -16,6 +16,8 @@ class ValidateTitle extends Validator {
         $data = $this->data;
         if (mb_strlen($data) == 0) $this->setErrors(self::CODE_EMPTY);
         elseif (mb_strlen($data) > self::MAX_LEN) $this->setErrors(self::CODE_MAX_LEN);
+        //if (!session_id()) session_start();
+        //$_SESSION["title"]="1";
     }
 
 }

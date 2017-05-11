@@ -17,6 +17,8 @@ class ValidateURI extends Validator
             $pattern = "~^(?:/[a-z0-9.,_@%&?+=\~/-]*)?(?:#[^ '\"&<>]*)?$~i";
             if (!preg_match($pattern, $data)) $this->setErrors(self::CODE_UNKNOWN);
         }
+        //if (!session_id()) session_start();
+        //$_SESSION["uri"]="1";
     }
 
 }

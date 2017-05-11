@@ -17,5 +17,6 @@ class ValidateSmallText extends Validator
         $data = $this->data;
         if (strlen($data) == 0) $this->setErrors(self::CODE_EMPTY);
         elseif (strlen($data) > self::MAX_LEN) $this->setErrors(self::CODE_MAX_LEN);
+
     }
 }

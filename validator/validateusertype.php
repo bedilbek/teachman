@@ -15,9 +15,9 @@ class ValidateUserType extends Validator {
 
     protected function validate() {
         $data = $this->data;
-        if (mb_strlen($data) == 0) $this->setErrors(self::CODE_EMPTY);
+        if (strlen($data) == 0) $this->setErrors(self::CODE_EMPTY);
         else {
-            if (mb_strlen($data) > self::MAX_LEN) $this->setErrors(self::CODE_MAX_LEN);
+            if (strlen($data) > self::MAX_LEN) $this->setErrors(self::CODE_MAX_LEN);
             else {
                 $pattern = "/^[ae]$/i";
                 if (!preg_match($pattern, $data)) $this->setErrors(self::CODE_INVALID);

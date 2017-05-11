@@ -21,6 +21,7 @@ class ValidateName extends Validator
         else {
             if (strlen($data)> self::MAX_LEN) $this->setErrors(self::CODE_MAX_LEN);
             elseif ($this->isContainQuotes($data)) $this->setErrors(self::CODE_INVALID);
+
         }
 
     }

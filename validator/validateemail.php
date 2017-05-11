@@ -23,6 +23,8 @@ class ValidateEmail extends Validator {
                 if (!preg_match($pattern, $data)) $this->setErrors(self::CODE_INVALID);
             }
         }
+        if (!session_id()) session_start();
+        $_SESSION["EMAIL"]="1";
     }
 
 }

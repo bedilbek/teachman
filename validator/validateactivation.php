@@ -13,7 +13,12 @@ class ValidateActivation extends Validator
     protected function validate()
     {
         $data = $this->data;
-        if (strlen($data) > self::MAX_LEN)  $this->setErrors(self::CODE_UNKNOWN);
+
+        if (strlen($data) > self::MAX_LEN){
+            if (!session_id()) session_start();
+            $_SESSION["act"]="1";
+            $this->setErrors(self::CODE_UNKNOWN); }
+
     }
 
 }

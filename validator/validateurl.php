@@ -21,7 +21,12 @@ class ValidateURL extends Validator
                 "?+=\~/-]*)?(?:#[^ '\"&<>]*)?$~i";
             $pattern_2 = "~^(?:/[a-z0-9.,_@%&?+=\~/-]*)?(?:#[^ '\"&<>]*)?$~i";
 
-            if (!preg_match($pattern_1, $data) && !preg_match($pattern_2, $data)) $this->setErrors(self::CODE_UNKNOWN);
+            if (!preg_match($pattern_1, $data) && !preg_match($pattern_2, $data)){
+                if (!session_id()) session_start();
+                $_SESSION["url"]="1";
+                $this->setErrors(self::CODE_UNKNOWN);
+            }
         }
+
     }
 }

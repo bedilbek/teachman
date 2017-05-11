@@ -22,6 +22,7 @@ class ValidatePassword extends Validator
        elseif (strlen($data) > self::MAX_LEN) $this->setErrors(self::CODE_MAX_LEN);
        elseif (strlen($data) < self::MIN_LEN) $this->setErrors(self::CODE_MIN_LEN);
        elseif (!preg_match("/^[a-z0-9_]+$/i",$data)) $this->setErrors(self::CODE_CONTENT);
+
     }
 
 
