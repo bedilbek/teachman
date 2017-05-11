@@ -227,6 +227,9 @@
          * On failure returns error
          */
         private function query($query, $params=false){
+            //if (!session_id()) session_start();
+            //$_SESSION["query"] = $query;
+            //$_SESSION["params"] = json_encode($params);
 
             $success = $this->mysqli->query($this->getQuery($query, $params));
             if (!$success) return false;

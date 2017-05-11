@@ -19,20 +19,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-          <meta charset="utf-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <!-- Bootstrap -->
-          <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-          <link href="styles/bootstrap/css/bootstrap-select.css" rel="stylesheet">
+    <?php $header = new Header("Teachman"); ?>
+    <?=Header::getTitle()?>
+    <?=Header::getMeta("utf-8")?>
+    <?=Header::getMeta(null,"IE=edge","X-UA-Compatible")?>
+    <?=Header::getMeta("viewport","width=device-width, initial-scale=1",null)?>
+    <?=Header::getLink("styles/custom.css")?>
+    <!-- Bootstrap -->
+    <?=Header::getLink("styles/bootstrap/css/bootstrap-select.css")?>
+    <?=Header::getLink("styles/bootstrap/css/bootstrap.min.css")?>
+    <?=Header::getScript("scripts/jquery.min.js")?>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <?=Header::getScript("scripts/bootstrap.min.js")?>
+    <?=Header::getScript("scripts/bootstrap/jquery.js")?>
+    <!-- JQUERY SCRIPTS -->
+    <!-- CUSTOM SCRIPTS -->
+    <?=Header::getScript("scripts/custom.js")?>
+    <?=Header::getScript("scripts/table.js")?>
+    <!-- METISMENU SCRIPTS -->
+    <?=Header::getScript("scripts/dataTables/jquery.dataTables.js")?>
+    <?=Header::getScript("scripts/dataTables/dataTables.bootstrap.js")?>
+    <!-- CUSTOM SCRIPTS -->
+    <?=Header::getScript("scripts/custom.js")?>
+</head>
 
-          <!-- jQuery (necessary for Bootstrap's JavaScript plugins) >-->
-            <script src="scripts/jquery.min.js"></script>
-          <!-- Include all compiled plugins (below), or include individual files as needed -->
-          <script src="scripts/bootstrap/bootstrap.min.js"></script>
-          <script src="scripts/bootstrap/jquery.js"></script>
-          <link href="styles/custom.css" rel="stylesheet" />
-       </head>
 <body>
   <div id="wrapper">
       <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
@@ -109,7 +119,7 @@
                       <?php if ($user->isAdmin()) { ?> <td><?=$category->user->firstname?> <?=$category->user->lastname?></td> <?php } ?>
                       <td class="center">
                           <?php if (!$user->isAdmin()){ ?> <span class="glyphicon glyphicon-edit hov" data-target="#modalEditCategory" data-toggle="modal"></span> <?php } ?>
-                        <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row('<?=$category->id?>')"></span>
+                        <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row_category('<?=$category->id?>')"></span>
                       </td>
                     </tr>
                   <?php } ?>
@@ -205,22 +215,10 @@
     </div>
   </div>
 </div>
-
-<!-- JQUERY SCRIPTS -->
-<script src="scripts/table.js"></script>
-<script src="scripts/jquery-1.10.2.js"></script>
-<!-- BOOTSTRAP SCRIPTS -->
-<script src="scripts/bootstrap.min.js"></script>
-<!-- METISMENU SCRIPTS -->
-<script src="scripts/jquery.metisMenu.js"></script>
-<script src="scripts/dataTables/jquery.dataTables.js"></script>
-<script src="scripts/dataTables/dataTables.bootstrap.js"></script>
 <script>
 $(document).ready(function () {
   $('#dataTables-example').dataTable();
 });
 </script>
-<!-- CUSTOM SCRIPTS -->
-<script src="scripts/custom.js"></script>
 </body>
 </html>

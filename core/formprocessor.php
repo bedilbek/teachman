@@ -34,15 +34,17 @@ class FormProcessor {
                     //print $this->request->$field;
                     //print $obj->$field;
                     //exit;
-                }
+                    }
             }
             //exit;
+            //$_SESSION["qwerty"] = "qwerty";
             if ($obj->save()) {
                 if ($success_message) $this->setSessionMessage($message_name, $success_message);
                 return $obj;
             }
         } catch (Exception $e) {
-
+               // if (!session_id()) session_start();
+                //$_SESSION["asd"] = $e;
             $this->setSessionMessage($message_name, $this->getError($e));
             return null;
         }

@@ -336,6 +336,8 @@ abstract class AbstractObjectDB
 
             return true;
         }
+        //if (!session_id()) session_start();
+        //$_SESSION["validd"] = json_encode($errors);
         throw new ValidatorException($errors);
     }
 

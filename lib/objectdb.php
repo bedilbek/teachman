@@ -22,5 +22,4 @@ class ObjectDB extends AbstractObjectDB {
         return true;
     }
 
-
 }

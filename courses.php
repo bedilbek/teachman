@@ -19,16 +19,28 @@ else {
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-          <meta charset="utf-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-          <link href="styles/bootstrap/css/bootstrap-select.css" rel="stylesheet">
-          <script src="scripts/jquery.min.js"></script>
-          <script src="scripts/bootstrap.min.js"></script>
-          <script src="scripts/bootstrap/jquery.js"></script>
-          <link href="styles/custom.css" rel="stylesheet" />
-          <title>TeachMan</title>
+    <?php $header = new Header("Teachman"); ?>
+    <?=Header::getTitle()?>
+    <?=Header::getMeta("utf-8")?>
+    <?=Header::getMeta(null,"IE=edge","X-UA-Compatible")?>
+    <?=Header::getMeta("viewport","width=device-width, initial-scale=1",null)?>
+    <?=Header::getLink("styles/custom.css")?>
+    <!-- Bootstrap -->
+    <?=Header::getLink("styles/bootstrap/css/bootstrap-select.css")?>
+    <?=Header::getLink("styles/bootstrap/css/bootstrap.min.css")?>
+    <?=Header::getScript("scripts/jquery.min.js")?>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <?=Header::getScript("scripts/bootstrap.min.js")?>
+    <?=Header::getScript("scripts/bootstrap/jquery.js")?>
+    <!-- JQUERY SCRIPTS -->
+    <!-- CUSTOM SCRIPTS -->
+    <?=Header::getScript("scripts/custom.js")?>
+    <?=Header::getScript("scripts/table.js")?>
+    <!-- METISMENU SCRIPTS -->
+    <?=Header::getScript("scripts/dataTables/jquery.dataTables.js")?>
+    <?=Header::getScript("scripts/dataTables/dataTables.bootstrap.js")?>
+    <!-- CUSTOM SCRIPTS -->
+    <?=Header::getScript("scripts/custom.js")?>
 </head>
 <body>
     <div id="wrapper">
@@ -83,7 +95,7 @@ else {
                        <div class="panel-heading" style="font-size:20px">
                           Course Management
                           <div class="text-right">
-                            <button data-target="#modalCourse" class="btn btn-info text-right" data-toggle="modal">ADD</button>
+                            <?php if (!$user->isAdmin()) { ?> <button data-target="#modalCourse" class="btn btn-info text-right" data-toggle="modal">ADD</button> <?php } ?>
                           </div>
                         </div>
 
@@ -108,7 +120,7 @@ else {
                                          <?php $t = $course->category->category_name; if ($user->isAdmin()) $t = $course->category->user->firstname." ".$course->category->user->lastname; ?> <td><?=$t?></td>
                                        <td class="center">
                                            <?php if (!$user->isAdmin()){ ?>  <span class="glyphicon glyphicon-edit hov" data-target="#modalEditCourse" data-toggle="modal"></span> <?php } ?>
-                                           <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row('<?=$course->id?>')"></span>
+                                           <span class="delete glyphicon glyphicon-remove hov" onclick="delete_row_course('<?=$course->id?>')"></span>
                                        </td>
                                    </tr>
                                  <?php } ?>
@@ -216,23 +228,11 @@ else {
      </div>
 
 
-    <!-- JQUERY SCRIPTS -->
-    <script src="scripts/jquery-1.10.2.js"></script>
-    <script src="scripts/table.js"></script>
-      <!-- BOOTSTRAP SCRIPTS -->
-    <script src="scripts/bootstrap.min.js"></script>
-    <!-- METISMENU SCRIPTS -->
-    <script src="scripts/jquery.metisMenu.js"></script>
-    <script src="scripts/dataTables/jquery.dataTables.js"></script>
-    <script src="scripts/dataTables/dataTables.bootstrap.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable();
         });
 </script>
-      <!-- CUSTOM SCRIPTS -->
-    <script src="scripts/custom.js"></script>
-
-
 </body>
 </html>

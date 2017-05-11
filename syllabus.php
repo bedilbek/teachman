@@ -1,7 +1,12 @@
 <?php
 require_once "start.php";
+clearstatcache();
 $request = new Request();
 if (!session_id()) session_start();
+//session_unset();
+//session_destroy();
+//print_r($_SESSION["message"]["register"]);
+//print_r($_SESSION);
 if (!empty($_SESSION["auth_login"]) && !empty($_SESSION["auth_password"])) {
     $username = $_SESSION["auth_login"];
     $password = $_SESSION["auth_password"];
@@ -9,8 +14,26 @@ if (!empty($_SESSION["auth_login"]) && !empty($_SESSION["auth_password"])) {
     $user_id = $user->getID();
     $fields = MixedDB::getMixedObjects($user_id);
     $courses = CourseDB::getAllOnUserID($user_id);
-    $syllabus = SyllabusDB::getAllOnUserID($user_id);
-    echo $request->course_id;
+    $course_obj =" ";
+    $course_text = " ";
+    $course_class_str =" ";
+    $syllabus_id = 0;
+    if ($request->selectCourse) {
+
+        $course_id = $request->selectCourse;
+        $syllabus = SyllabusDB::getOnCourseID($user_id, $course_id);
+        if (isset($syllabus)) {
+            $syllabus_id = $syllabus->getID();
+            $lessons = LessonDB::getAllOnSyllabusID($syllabus_id);
+        }
+        $course_obj = (isset($syllabus)) ? $syllabus->course_objectives : " ";
+        $course_text = (isset($syllabus)) ? $syllabus->textbooks : " ";
+        $course_class_str = (isset($syllabus)) ? $syllabus->class_structure : " ";
+
+    }
+    if ($request->data) {
+    }
+
 }
 else {
     //print "4";
@@ -21,16 +44,28 @@ else {
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-          <meta charset="utf-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-          <link href="styles/bootstrap/css/bootstrap-select.css" rel="stylesheet">
-          <script src="scripts/jquery.min.js"></script>
-          <script src="scripts/bootstrap.min.js"></script>
-          <script src="scripts/bootstrap/jquery.js"></script>
-          <link href="styles/custom.css" rel="stylesheet" />
-          <title>TeachMan</title>
+    <?php $header = new Header("Teachman"); ?>
+    <?=Header::getTitle()?>
+    <?=Header::getMeta("utf-8")?>
+    <?=Header::getMeta(null,"IE=edge","X-UA-Compatible")?>
+    <?=Header::getMeta("viewport","width=device-width, initial-scale=1",null)?>
+    <?=Header::getLink("styles/custom.css")?>
+    <!-- Bootstrap -->
+    <?=Header::getLink("styles/bootstrap/css/bootstrap-select.css")?>
+    <?=Header::getLink("styles/bootstrap/css/bootstrap.min.css")?>
+    <?=Header::getScript("scripts/jquery.min.js")?>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <?=Header::getScript("scripts/bootstrap.min.js")?>
+    <?=Header::getScript("scripts/bootstrap/jquery.js")?>
+    <!-- JQUERY SCRIPTS -->
+    <!-- CUSTOM SCRIPTS -->
+    <?=Header::getScript("scripts/custom.js")?>
+    <?=Header::getScript("scripts/table.js")?>
+    <!-- METISMENU SCRIPTS -->
+    <?=Header::getScript("scripts/dataTables/jquery.dataTables.js")?>
+    <?=Header::getScript("scripts/dataTables/dataTables.bootstrap.js")?>
+    <!-- CUSTOM SCRIPTS -->
+    <?=Header::getScript("scripts/custom.js")?>
 </head>
 
 <body>
@@ -83,14 +118,14 @@ else {
                   <div class="panel-heading ">
                     <div class="row">
                       <div class="col-sm-6">
-
-                        <button class="btn btn-info " style="padding:0px">
-                          <select id="selectCourse" class="form-control" style="font-size:20px">
+                          <div id="selectCourseDiv">
+                          <select id="selectCourse" name="selectCourse" class="form-control" style="font-size:20px">
+                            <option value="0">Select</option>
                             <?php foreach ($courses as $course) { ?>
-                            <option value="<?=$course->id?>"><?=$course->course_name?></option>
+                            <option <?php if(isset($course_id) && $course_id == $course->id) { $show =true; echo "selected"; } ?> value="<?=$course->id?>"><?=$course->course_name?></option>
                             <?php } ?>
                           </select>
-                        </button>
+                          </div>
                       </div>
                       <div class="col-sm-6 text-right">
                         <button id="asssa" class="btn btn-success" data-target="#modalSyllabus" data-toggle="modal">CREATE</button>
@@ -99,15 +134,19 @@ else {
                         </div>
                       </div>
                     </div>
-
+                    <?php
+                    if (isset($show)) {
+                    ?>
                     <div class="panel-body">
                       <div class="well">
                       <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-6">
-                          <h3>Course Objective:</h3>
+                         <?php if (isset($syllabus_id)) { ?>   <input id="syllabus_id" type="hidden" value="<?=$syllabus_id?>" > <?php } ?>
+
+                            <h3>Course Objective</h3>
                         </div>
                         <div class="col-md-9 col-sm-6 col-xs-6">
-                          <h4>Course Objective</h4>
+                        <h4><?=$course_obj?></h4>
                         </div>
                       </div>
                       <div class="row">
@@ -115,7 +154,7 @@ else {
                           <h3>Textbooks:</h3>
                         </div>
                         <div class="col-md-9 col-sm-6 col-xs-6">
-                          <h4>Course Objective</h4>
+                           <h4><?=$course_text?></h4>
                         </div>
                       </div>
                       <div class="row">
@@ -123,13 +162,13 @@ else {
                           <h3>Class methods:</h3>
                         </div>
                         <div class="col-md-9 col-sm-6 col-xs-6">
-                          <h4>Course Objective</h4>
+                           <h4><?=$course_class_str?></h4>
                         </div>
-                      </div>
                     </div>
                     </div>
+                    <?php if (isset($syllabus)) { $count=1; ?>
                     <div class="table-responsive" style="margin:10px">
-                      <table class="table table-striped table-bordered table-hover" id="data_table" >
+                      <table class="table table-striped table-bordered table-hover" id="" >
                         <thead>
                           <tr>
                             <th>No</th>
@@ -141,9 +180,10 @@ else {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="odd" id="row1">
-                            <td  id="no1">1</td>
-                            <td id="topic1">Introduction to Discrete Mathematics and Logic</td>
+                        <?php foreach ($lessons as $lesson) { ?>
+                          <tr class="odd" id="row<?=$lesson->getID()?>">
+                            <td  id="no">1</td>
+                            <td id="topic">Introduction to Discrete Mathematics and Logic</td>
                             <td id="week1">W1</td>
                             <td id="content1">Propositional Equaivalences (1.1, 1.2, 1.3 of the textbook)</td>
                             <td data-target="#modalLesson" data-toggle="modal" id="lesson1" style="color:blue" class="hov">Lesson1</td>
@@ -153,7 +193,7 @@ else {
                               <span class="delete glyphicon glyphicon-remove hov"  onclick="delete_row('1')"></span>
                             </td>
                           </tr>
-
+                            <?php } ?>
                           <tr class="even" id="row2">
                             <td id="no2">2</td>
                             <td id="topic2">I	Predicates and Quantifiers, Rules of Inference</td>
@@ -166,8 +206,7 @@ else {
                               <span class="delete glyphicon glyphicon-remove hov"  onclick="delete_row('2')"></span>
                             </td>
                           </tr>
-
-                          <tr class="odd">
+                          <tr class="odd" id="row3">
                             <td id="new_no"></td>
                             <td><input type="text" id="new_topic"></td>
                             <td><input type="text" id="new_week"></td>
@@ -175,10 +214,13 @@ else {
                             <td><input type="text" id="new_lesson"></td>
                             <td><span class="add glyphicon glyphicon-plus hov" onclick="add_row()" ></span></td>
                           </tr>
+
                         </tbody>
                       </table>
                     </div>
+                        <?php } ?>
                   </div>
+                    <?php } ?>
                 </div>
                 <!--End Advanced Tables -->
               </div>
@@ -366,34 +408,7 @@ else {
                 </div>
               </div>
             </div>
-
-        <!-- JQUERY SCRIPTS -->
-        <script src="scripts/table.js"></script>
-        <script src="scripts/jquery-1.10.2.js"></script>
-        <!-- BOOTSTRAP SCRIPTS -->
-        <script src="scripts/bootstrap.min.js"></script>
-        <!-- METISMENU SCRIPTS -->
-        <script src="scripts/jquery.metisMenu.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-      <!-- CUSTOM SCRIPTS -->
-      <script src="scripts/custom.js"></script>
-        <script type="text/javascript">
-            function pageLoad() {
-                alert("hee");
-                var e = document.getElementById("selectCourse");
-                var selectedCourse = e.options[e.selectedIndex].value;
-
-
-                $('#selectCourse').on("change", function () {
-                    $.ajax({
-                        url: 'syllabus.php',
-                        type: GET,
-                        data: {course_id: selectedCourse},
-                        async: false;
-                    })
-                });
-
-            };
-        </script>
+      <script>
+      </script>
 </body>
 </html>

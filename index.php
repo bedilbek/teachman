@@ -1,15 +1,14 @@
-<?php
- require_once "start.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Achieve success</title>
+	<title>TeachMan</title>
+  
 	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Open+Sans|Raleway" rel="stylesheet">
 	<link rel="stylesheet" href="styles/flexslider.css">
 	<link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="styles/font-awesome.min.css">
 	<link rel="stylesheet" href="styles/style.css">
 	
 </head>
@@ -25,11 +24,11 @@
 						<div class="top-left">
 
 							<ul>
-								<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="icon-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="icon-twitter" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="icon-skype" aria-hidden="true"></i></a></li>
+								
+								<li><a href="#"><i class="icon-vimeo" aria-hidden="true"></i></a></li>
 							</ul>
 
 						</div>
@@ -37,7 +36,7 @@
 
 					<div class="col-md-6">
 						<div class="top-right">
-							<p>Location:<span>Inha University Street 2020, Tashkent, Uzbekistan</span></p>
+							<p>Location:<span>Inha University Street Ziyolilar, Tashkent, Uzbekistan</span></p>
 						</div>
 					</div>
 
@@ -53,30 +52,23 @@
 				<div class="container">
 
 					<div class="navbar-header">
-						<a href="index.php" class="navbar-brand"></a>
-						<!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ftheme">
-							<span class="sr-only">Toggle</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>-->
+						<a href="index.php"></a>
+					
 					</div>
 
-					<div class="navbar-collapse collapse" id="ftheme">
+					<div class="navbar-static-top navbar-collapse collapse" id="ftheme">
 
 						<ul class="nav navbar-nav navbar-right">
 							<li ><a href="#home">home</a></li>
-							<li ><a href="#about " >about</a></li>
+							<li ><a href="#about" >about</a></li>
 							<li ><a href="#solution" >solution</a></li>
 							<li><a href="#rating">Rating</a></li>
-							<li ><a href="#company">Compamy</a>
+							<li ><a href="#company">Company</a>
 							</li>
 							<li><a href="#contact">contact</a></li>
 							<li> <button class="btn" onclick="window.location='login.php';" value="Register">Sign in </button></li>
 							<li> <button class="btn" onclick="window.location='reg.php';" value="Register">Register </button></li>
-							 <!-- <li class="hidden-sm hidden-xs">
-	                          <a href="#" id="ss"><i class="fa fa-search" aria-hidden="true"></i></a> 
-	                        </li>-->
+							
 						</ul>
 
 					</div>
@@ -98,29 +90,28 @@
 
         <ul class="slides">
             <li>
-            	<img src="images/slider/slider1.jpg">
+            	<img src="images/slider/teachers.jpg">
 
 				<div class="caption">
-					<p> <br> <br> <br><br><h2><span>Teachers</span></h2> 
 					<h2><span>Improve Teaching Skills</span></h2></p>
 					        
 	            </div>
 
             </li>
             <li>
-            	<img src="images/slider/slider2.jpg">
+            	<img src="images/slider/kids-and-teacher.jpg">
 
 				<div class="caption">
-					<p> <br> <br> <br><br><br><br><h2><span>Exchange your skills</span></h2> </p>
+					<p><br><br><br><br><h2><span>Exchange your skills</span></h2> </p>
 					              
 	            </div>
 
             </li>
             <li>
-            	<img src="images/slider/slider3.jpg">
+            	<img src="images/slider/teach.jpg">
 
 				<div class="caption">
-					<p> <br> <br> <br><br><h2><span>Teachers Rate</span></h2> 
+					<p> <br> <br> <br><br><h2><span>Teachers Rating</span></h2>
 					<h2><span>Be the best Teacher</span></h2>            
 	            </div>
 
@@ -137,36 +128,39 @@
 				<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 					<div class="about-heading">
 						<h2>about</h2> 
-						<p>...</p>
+						<p></p>
 					</div>
 				</div>
 			</div>   	
     	</div>
 
-    	<!--about wrapper left-->
+
     	<div class="container">
 
     		<div class="row">
-    			<div class="col-xs-12 hidden-sm col-md-5">
+    			<div class="col-xs-12 hidden-sm col-md-6">
 
     				<div class="about-left">
-    					<img src="images/about/school.jpg" alt="">
+    				<br>
+    					<img src="images/about/teachers_hate.jpg" alt="" width="570" height="680" >
     				</div>
 
     			</div>
 
-    			<!--about wrapper right-->
-    			<div class="col-xs-12 col-md-7">
+
+    			<div class="col-xs-12 col-md-6">
     				<div class="about-right">
-    					<div class="about-right-heading">
-    						<h1>about our website</h1>
+    					<div class="about-right-heading" >
+    					<p><br></p>
+    						<h1 style="padding-bottom: 0px; margin-bottom: 0px; bottom: 0; margin-top: 10px;">About Our Website</h1>
     					</div>
   
     					<div class="about-right-boot">
     						<div class="about-right-wrapper">
-	    						<h3>The Syllabus Problem</h3>
+
+	    						<h3 style="margin-top: 10px;">The Syllabus Problem</h3>
 	    						
-								<p>How to decide on the themes, topics, &content
+								<p>How to decide on the themes, topics and content
 								
 								<br>Difficulty of developing a logical or learnable sequence for other syllabus if topics are the framework</p>
     						</div>
@@ -174,15 +168,15 @@
 
     					<div class="about-right-best">
     						<div class="about-right-wrapper">
-	    						<a href="problems.html"><h3>Problems for Teachers That Limit Their Overall Effectiveness</h3></a>
+	    						<h3>Problems for Teachers That Limit Their Overall Effectiveness</h3>
 	    						<p>Teaching is a difficult profession. There are many problems for teachers that make the profession more complicated than it has to be.</p>
     						</div>
     					</div>
 
     					<div class="about-right-support">
     						<div class="about-right-wrapper">
-	    						<a href="effective.html"><h3>We help You</h3></a>
-	    						<p>Go to solutions and overcomes from your problems</p>
+	    						<h3>We help You</h3>
+	    						<p>Go to solutions and overcome from all your problems</p>
     						</div>
     					</div>
     				</div>
@@ -195,20 +189,7 @@
     	</div>
     </div>
 
-	<!--about bg-->
-		<div id="about-bg">
-
-			<div class="container">
-				<div class="row">
-
-					
-
-				</div>
-			</div>
-
-			<div class="cover"></div>
-
-		</div> 
+	
 
 		<!--solution-->
 		<div id="solution">
@@ -233,24 +214,24 @@
                     	
                         <div class="solutionblock col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         	<div class="inner-box">
-                            	<div class="icon-box"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
-                            	<a href="best.html"><h4>Teacher Experience</h4> </a>
+                            	<div class="icon-box"><i class="glyphicon glyphicon-indent-right" aria-hidden="true"></i></div>
+                            	<h4>Teacher Experience</h4> 
                                 
-                                <div class="text">TeachMan empowers teachers with unprecedented flexibility to customize courses and the student learning experience. Teachers and Administrators can alter the instructional sequence of Courses, insert Units, Lessons, Projects or Quizzes from other courses, insert Teacher-Syllabus, Custom Lessons, delete or skip lessons and set individual course levels for every student. <br><br></div>
+                                <div class="text">TeachMan empowers teachers with unprecedented flexibility to customize courses and the student learning experience. Teachers and Administrators can alter the instructional sequence of Courses, insert Units, Lessons,  or Quizzes from other courses, insert Teacher-Syllabus, Custom Lessons, delete or skip lessons and set individual course levels for every student and also can communucate with other teachers. <br><br></div>
                             </div>
                         </div>
                         
                         <div class="solutionblock col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         	<div class="inner-box">
-                            	<div class="icon-box"><i class="fa fa-bar-chart" aria-hidden="true"></i></div>
-                            	<a href="planning.html"><h4>DASHBOARDS AND REPORTING</h4> </a>
-                                <div class="text">The intuitive TeachMan data and instructional management portal allows teachers to easily manage and customize courses, create and assign tailored courses, monitor student progress, grade student work and communicate with their students. </div>
+                            	<div class="icon-box"><i class="glyphicon glyphicon-dashboard " aria-hidden="true"></i></div>
+                            	<h4>DASHBOARDS AND REPORTING</h4>
+                                <div class="text">The intuitive TeachMan data and instructional management portal allows teachers to easily manage and customize courses, create and assign tailored courses,  grade student quizzes. </div>
                             </div>
                         </div>
                         
                         <div class="solutionblock col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         	<div class="inner-box">
-                            	<div class="icon-box"><i class="fa fa-trophy" aria-hidden="true"></i></div>
+                            	<div class="icon-box"><i class="glyphicon glyphicon-star" aria-hidden="true"></i></div>
                                 <h4>TEACHER RATING</h4>
                                 <div class="text">According to teachers activity and performance their rating are calculated </div>
                             </div>
@@ -265,14 +246,14 @@
             </div>
 
             <!--Content Column-->
-            <div class="content-column clearfix">
-                <div class="content-box">
-                	<div class="inner-box">
+            <div class="content-column clearfix" >
+                <div class="content-box" >
+                	<div class="inner-box" >
                         <!--Section Title-->
                         <div class="sec-title aligned-right">
                             <h2>Our Solu<span>tions</span></h2>
                         </div>
-                        <div class="text">CLICK BELOW TO EXPLORE THE MANY WAYS EDUCATORS ARE LEVERAGING ODYSSEYWARE® CURRICULUM AND INSTRUCTIONAL TOOLS. </div>
+                        <div class="text">CLICK BELOW TO EXPLORE THE MANY WAYS WHICH ARE PROVIDED CURRICULUM AND INSTRUCTIONAL TOOLS. </div>
                     </div>
                 </div>
             </div>
@@ -283,7 +264,7 @@
 
 
 
-			<!--solution gapping-->
+			<!--solution -->
 			<div class="solutionfooter hidden-xs">
 				<div class="container">
 					<div class="row">
@@ -296,7 +277,7 @@
 
 						<div class="col-md-5">
 							<div class="solutionfooterRight">
-								<button class="btn" onclick="window.location='index.php';" value="Register">Register</button>
+								<button class="btn"  value="Register">Register</button>
 							</div>
 						</div>
 					</div>
@@ -304,7 +285,7 @@
 			</div>
 		</div>
 
-		<!--portfolio-->
+		<!--rating-->
 		<div id="rating">
 			<div class="container">
 				<div class="row">
@@ -321,87 +302,21 @@
 
 	    	<div class="ratingthumbnail">
 	    		<div class="container-fluid">
-	    			<div class="row">
-
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
+	    			
+	    				
 	    					<div class="item">
-	    						<img src="images/portfolio/portfolio1.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
-	    					</div>
-	    				</div>
+	    						<img class="t1" src="images/rating/teacher1.jpg" alt="" height="300" width="150" hspace="20" align="middle">
 
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio2.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
-	    					</div>
-	    				</div>
+	    						<img class="t1" src="images/rating/teacher2.jpg" alt="" height="300" width="150px" hspace="20" align="middle">
+		    						
+		    					<img class="t1" src="images/rating/teacher3.jpg" alt="" height="300" width="150" hspace="20" align="middle">
 
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio3.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
+									
+	    						<img class="t1" src="images/rating/teacher4.jpg" alt="" height="300" width="150" hspace="20" align="middle">
+                               		<p></p>
+                               		<br>
 	    					</div>
-	    				</div>
-
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio4.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
-	    					</div>
-	    				</div>
-
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio5.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>what you see</p>
-                            	</div>
-	    					</div>
-	    				</div>
-
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio6.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
-	    					</div>
-	    				</div>
-
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio7.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
-	    					</div>
-	    				</div>
-
-	    				<div class="col-xs-6 col-sm-3 col-md-3">
-	    					<div class="item">
-	    						<img src="images/portfolio/portfolio8.jpg" alt="">
-	    						<div class="caption">
-                               		<i class="fa fa-search" aria-hidden="true"></i>
-                               		<p>lorem ipsum amet</p>
-                            	</div>
-	    					</div>
-	    				</div>
+	    					    				
 
 	    			</div>
 	    		</div>
@@ -413,52 +328,106 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-						<div class="companyheading">
+						<div class="companyheading" >
+						<br>
 							<h2>TEACHMAN</h2> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent metus magna,malesuada porta elementum vitae.</p>
+							
 						</div>
 					</div>
 				</div>   
 
-				<div class="content">
-	                <div class="row">
-                        <div id="sendmessage">Your message has been sent. Thank you!</div>
-                        <div id="errormessage"></div>
-                        
-                         <form action="" method="post" role="form" class="form contactForm">
-	                        <div class="col-md-4">
-	                            <div class="form-group">
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                    <div class="validation"></div>
-                                </div>
-	                        </div>
-	                        <div class="col-md-4">
-	                            <div class="form-group">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                    <div class="validation"></div>
-                                </div>
-	                        </div>
-	                        <div class="col-md-4">
-	                            <div class="form-group">
-                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                                    <div class="validation"></div>
-                                </div>
-	                        </div>
-	                        <div class="col-md-12">
-	                            <div class="form-group">
-                                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                                    <div class="validation"></div>
-                                </div>
-	                        </div>
-	                        <div class="submit">
-	                            <button class="btn btn-default" type="submit">Send Now</button>
-	                        </div>
-	                    </form>
-	                </div>
-            </div>	
+		 <div id="conten" >
+			<div class="teamheading">
+    						<h1 style="text-align: center; font-weight: bold;">Team Members</h1>
+    						<br>
+    					</div>
+	            <div class="row">
+
+		            <div class="col-xs-12 hidden-sm col-md-4">
+	    				<div class="teamleft">
+	    					<img src="images/images.jpg" alt="" width="170" height="170">
+	    					<br>
+	    					<p></p>
+	    				</div>
+	    			</div>
+
+                  <div class="col-xs-12 col-md-8">
+    				<div class="teamright">
+    					
+  
+    					<div class="teamrightBoot">
+    						<div class="teamrightWrapper">
+	    						<h3 class="n">Anvarjonova Malika</h3>
+	    						
+								<p>Student of Inha Univarsity in Tashkent
+								
+								<br>Experince </p>
+    						</div>
+    					</div>
+
+    					
+    				</div>
+    			  </div>     
+                </div>
+
+                <div class="row">
+
+		            <div class="col-xs-12 hidden-sm col-md-4">
+	    				<div class="teamleft">
+	    					<img src="images/me-1.jpg" alt="" width="170" height="170">
+	    					<br><p></p>
+	    				</div>
+	    			</div>
+
+                  <div class="col-xs-12 col-md-8">
+    				<div class="teamright">
+    					
+    					<div class="teamrightBoot">
+    						<div class="teamrightWrapper">
+	    						<h3 class="n">Khushnoza Kamalova</h3>
+	    						
+								<p>Sophomore Student of Inha Univarsity in Tashkent
+								<br>Obtain HTML, CSS and WEB design skilss. Having Knowledge about System programming, Java and Data Structure <br> Email: <a href="http://missxushnoza.mail.ru">missxushnoza.mail.ru</a></p>
+    						</div>
+    					</div>
+
+    					
+    				</div>
+    			  </div>     
+                </div>	
+
+                 <div class="row">
+
+		            <div class="col-xs-12 hidden-sm col-md-4">
+	    				<div class="teamleft">
+	    					<img src="images/images.jpg" alt="" width="170" height="170">
+	    					<br><p></p>
+	    				</div>
+	    			</div>
+
+                  <div class="col-xs-12 col-md-8">
+    				<div class="teamright">
+    					
+    					<div class="teamrightBoot">
+    						<div class="teamrightWrapper">
+	    						<h3 class="n">Bedilbek Hamidov </h3>
+	    						
+								<p>Student of Inha Univarsity in Tashkent
+								
+								<br>Difficulty of developing a logical or learnable sequence for other syllabus if topics are the framework</p>
+    						</div>
+    					</div>
+
+    					
+    				</div>
+    			  </div>     
+                </div>	
+
+
+
 	    	</div>
 		</div>
-
+</div>
 
 		<!--contact-->
 		<div id="contact">
@@ -467,13 +436,13 @@
 					<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
 						<div class="contact-heading">
 							<h2>contact</h2> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent metus magna,malesuada porta elementum vitae.</p>
+							<p>...</p>
 						</div>
 					</div>
 				</div>   	
 	    	</div>
 
-	    	<div id="google-map" data-latitude="40.713732" data-longitude="-74.0092704"></div>
+	    	<div id="google-map" data-latitude="41.338525" data-longitude="69.33453"></div>
             
 		</div>
 
@@ -486,34 +455,15 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="footer-heading">
-							<h3><span>about</span> us</h3>
-							<p>To explore strange new worlds to seek out new life and new civilizations to boldly go where no man has gone before. It's time to play the music.</p>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+							<h3><span>Contact</span> us</h3>
+							<p><b>ADDRESS: </b>9, Ziyolilar str., M.Ulug`bek district, Tashkent City</p>
+							<p><b>PHONE:  </b>+99871 289-99-99</p>
+							<p><b>FAX:    </b>+99871 269-00-58</p>
+
 						</div>
 					</div>
 
-					<div class="col-md-4">
-						<div class="footer-heading">
-							<h3><span>latest</span> news</h3>
-							<ul>
-								<li><a href="#">Trends don't matter, but techniques do</a></li>
-								<li><a href="#">Trends don't matter, but techniques do</a></li>
-								<li><a href="#">Trends don't matter, but techniques do</a></li>
-								<li><a href="#">Trends don't matter, but techniques do</a></li>
-							</ul>
-						</div>
-					</div>
-
-					<div class="col-md-4">
-						<div class="footer-heading">
-							<h3><span>follow</span> us on instagram</h3>
-							<div class="insta">
-								<ul>
-								</ul>
-							</div>
-						</div>
-					</div>
-
+				
 				</div>
 			</div>
 		</div>
@@ -524,14 +474,14 @@
 				<div class="row">
 					
 
-					<div class="col-md-8">
+					<div class="col-md-10">
 						<div class="footer-right">
                             <ul class="list-unstyled list-inline pull-right">
-                                <li><a href="#home">Home</a></li>
-                                <li><a href="#about">About</a></li>
-                                <li><a href="#solution">Solutions</a></li>
-                                <li><a href="#rating">Portfolio</a></li>
-                                <li><a href="#contact">Contact</a></li>
+                                <li><a href="#home">Home    </a></li>
+                                <li><a href="#about">About    </a></li>
+                                <li><a href="#solution">Solutions    </a></li>
+                                <li><a href="#rating">Rating    </a></li>
+                                <li><a href="#contact">Contact    </a></li>
                             </ul>
 						</div>
 					</div>
@@ -541,12 +491,13 @@
         
 
 	
-	<!-- jQuery -->
-    <script src="scripts/bootstrap/jquery.js"></script>
-    <script src="scripts/bootstrap/bootstrap.min.js"></script>
+	
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/jquery.flexslider.js"></script>
     <script src="scripts/jquery.inview.js"></script>
     <script src="https://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="scripts/script.js"></script>
+
 </body>
 </html>

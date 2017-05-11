@@ -43,33 +43,89 @@ function save_row(no)
 function delete_row(no)
 {
  document.getElementById("row"+no+"").outerHTML="";
+
+}
+function delete_row_teacher(no)
+{
+    document.getElementById("row"+no+"").outerHTML="";
+    $.ajax({
+        type: "POST",
+        cache: false,
+        async: true,
+        dataTYPE: "JSON",
+        url: "manipulation/deletedata.php",
+        data: {"user_id": no},
+        success: function() {},
+        error: function(request, error) {console.log(arguments);
+            alert(" Can't do because: " + error);}
+    });
+
+}
+
+function delete_row_course(no){
+    document.getElementById("row"+no+"").outerHTML="";
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        async: true,
+        dataTYPE: "JSON",
+        url: "manipulation/deletedata.php",
+        data: {"course_id": no},
+        success: function() {},
+        error: function(request, error) {console.log(arguments);
+            alert(" Can't do because: " + error);}
+    });
+}
+
+function delete_row_category(no){
+    document.getElementById("row"+no+"").outerHTML="";
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        async: true,
+        dataTYPE: "JSON",
+        url: "manipulation/deletedata.php",
+        data: {"category_id": no},
+        success: function() {},
+        error: function(request, error) {console.log(arguments);
+            alert(" Can't do because: " + error);}
+    });
 }
 
 
 
-function add_row()
-{
- var new_topic=document.getElementById("new_topic").value;
- var new_week=document.getElementById("new_week").value;
- var new_content=document.getElementById("new_content").value;
- var new_lesson=document.getElementById("new_lesson").value;
 
- var table=document.getElementById("data_table");
- var table_len=(table.rows.length)-1;
- var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'>"+
-  "<td id='no"+table_len+"'>"+table_len+"</td>"+
-  "<td id='topic"+table_len+"'>"+new_topic+"</td>"+
-  "<td id='week"+table_len+"'>"+new_week+"</td>"+
-  "<td id='content"+table_len+"'>"+new_content+"</td>"+
-  "<td id='lesson"+table_len+"' data-target='#modalLesson' data-toggle='modal' style='color:blue' class='hov'>"+new_lesson+"</td>"+
-  "<td>"+
-       "<span class='edit glyphicon glyphicon-edit hov' id='edit_button"+table_len+"' onclick='edit_row("+table_len+")'></span>"+
-       "<span class='save glyphicon glyphicon-ok hov' id='save_button"+table_len+"' onclick='save_row("+table_len+")' style='display:none'></span>"+
-       "<span class='delete glyphicon glyphicon-remove hov' onclick='delete_row("+table_len+")'></span>"+
-  "</td></tr>";
 
- document.getElementById("new_topic").value="";
- document.getElementById("new_week").value="";
- document.getElementById("new_content").value="";
- document.getElementById("new_lesson").value="";
+function add_row() {
+
+    var syllabus_id = document.getElementById("syllabus_id").value;
+    var new_topic = document.getElementById("new_topic").value;
+    var new_week = document.getElementById("new_week").value;
+    var new_content = document.getElementById("new_content").value;
+    var new_lesson = document.getElementById("new_lesson").value;
+    var bool = true;
+    if (new_topic == "") bool = false;
+    if (new_week == "") bool = false;
+    if (new_content == "") bool = false;
+    if (new_lesson == "") bool = false;
+    if (syllabus_id == "" || syllabus_id == null) bool = false;
+  if (bool) {
+      $.ajax({
+          type: "POST",
+          cache: false,
+          async: true,
+          dataTYPE: "JSON",
+          url: "manipulation/adddata.php",
+          data: {"title":new_topic, "content":new_content, "week_number":new_week, "lesson_n":new_lesson, "syllabus_id":syllabus_id},
+          success: function() {},
+          error: function(request, error) {console.log(arguments);
+              alert(" Can't do because: " + error);}
+      });
+    document.getElementById("new_topic").value = "";
+    document.getElementById("new_week").value = "";
+    document.getElementById("new_content").value = "";
+    document.getElementById("new_lesson").value = "";
+}
 }

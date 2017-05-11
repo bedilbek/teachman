@@ -37,20 +37,23 @@ $request = new Request();
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-          <meta charset="utf-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="styles/custom.css" rel="stylesheet" />
+        <?php $header = new Header("Teachman"); ?>
+        <?=Header::getTitle()?>
+        <?=Header::getMeta("utf-8")?>
+        <?=Header::getMeta(null,"IE=edge","X-UA-Compatible")?>
+        <?=Header::getMeta("viewport","width=device-width, initial-scale=1",null)?>
+        <?=Header::getLink("styles/custom.css")?>
         <!-- Bootstrap -->
-        <link href="styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="styles/bootstrap/css/bootstrap-select.css" rel="stylesheet">
-
+        <?=Header::getScript("scripts/jquery.min.js")?>
+        <?=Header::getLink("styles/bootstrap/css/bootstrap.min.css")?>
+        <?=Header::getLink("styles/bootstrap/css/bootstrap-select.css")?>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="scripts/bootstrap.min.js"></script>
-        <script src="scripts/bootstrap/jquery.js"></script>
+        <?=Header::getScript("scripts/bootstrap.min.js")?>
+        <?=Header::getScript("scripts/bootstrap/jquery.js")?>
+        <!-- JQUERY SCRIPTS -->
+        <!-- CUSTOM SCRIPTS -->
+        <?=Header::getScript("scripts/custom.js")?>
 </head>
-
-
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-collapse navbar-cls-top " role="navigation" style="margin-bottom: 0">
@@ -406,13 +409,6 @@ $request = new Request();
         </div>
     </div>
 
-    <!-- JQUERY SCRIPTS -->
-    <script src="scripts/jquery-1.10.2.js"></script>
 
-    <!-- BOOTSTRAP SCRIPTS -->
-    <script src="scripts/bootstrap/bootstrap.min.js"></script>
-
-    <!-- CUSTOM SCRIPTS -->
-    <script src="scripts/custom.js"></script>
 </body>
 </html>
